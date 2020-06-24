@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'v1', "namespace" => "Api"], function ($router) {
-    Route::get("products", "ProductController@index");
+    Route::get("products", "ProductController@index")->name("products.index");
 });

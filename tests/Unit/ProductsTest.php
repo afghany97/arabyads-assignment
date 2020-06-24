@@ -9,9 +9,20 @@ class ProductsTest extends TestCase
     /**
      * @test
      */
-    public function testIsProductsEndResponds()
+    public function testIsProductsEndPointResponds()
     {
-        $this->getJson("/api/v1/products")
+        $this->getJson(route("products.index"))
             ->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function userCanListingAllProducts()
+    {
+        $response = $this->getJson(route("products.index"))
+            ->assertStatus(200);
+
+        $this->assertCount(2000, $response->getData()->products);
     }
 }

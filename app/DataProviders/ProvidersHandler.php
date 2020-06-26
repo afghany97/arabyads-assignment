@@ -3,18 +3,17 @@
 namespace App\DataProviders;
 
 use App\Factories\DataProviderFactory;
-use Illuminate\Http\Request;
 
 class ProvidersHandler
 {
     /**
-     * @param Request $request
+     * @param string|null $provider
      * @return array
      */
-    public function list(Request $request)
+    public function list(string $provider = null)
     {
         $products = [];
-        foreach (DataProviderFactory::getProviders($request->provider) as $dataProvider) {
+        foreach (DataProviderFactory::getProviders($provider) as $dataProvider) {
             $products = array_merge($dataProvider->listData(), $products);
         }
         return $products;

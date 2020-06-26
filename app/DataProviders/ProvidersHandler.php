@@ -2,25 +2,20 @@
 
 namespace App\DataProviders;
 
+use App\Factories\DataProviderFactory;
+use Illuminate\Http\Request;
+
 class ProvidersHandler
 {
     /**
-     * @var array
-     */
-    private $dataProviders = [
-        DataProviderX::class,
-        DataProviderY::class
-    ];
-
-    /**
+     * @param Request $request
      * @return array
      */
-    public function list()
+    public function list(Request $request)
     {
         $products = [];
-
-        foreach ($this->dataProviders as $dataProvider) {
-            $products = array_merge((resolve($dataProvider))->listData(), $products);
+        foreach (DataProviderFactory::getProviders($request->provider) as $dataProvider) {
+            $products = array_merge($dataProvider->listData(), $products);
         }
         return $products;
     }

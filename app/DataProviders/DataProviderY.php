@@ -2,6 +2,8 @@
 
 namespace App\DataProviders;
 
+use App\Utils\DataProvidersUtil;
+
 class DataProviderY extends DataProviderInterface
 {
     /**
@@ -28,7 +30,6 @@ class DataProviderY extends DataProviderInterface
      */
     protected function readData()
     {
-        $filePath = storage_path() . "/data/DataProviderY.json";
-        return json_decode(file_get_contents($filePath), true);
+        return json_decode(file_get_contents(DataProvidersUtil::getProviderFullPath(DataProvidersUtil::y)), true);
     }
 }

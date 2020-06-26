@@ -15,6 +15,6 @@ class ProductController extends Controller
      */
     public function index(Request $request, ProvidersHandler $providersHandler)
     {
-        return response()->json(["products" => $providersHandler->list()]);
+        return response()->json(["products" => $providersHandler->list($request)]);
     }
 }

@@ -18,7 +18,7 @@ class DataProviderY extends DataProviderInterface
                 "Product Currency" => $item["currency"] ?? null,
                 "Product Original Price" => $item["original_price"] ?? null,
                 "Product Current Price" => $item["current_price"] ?? null,
-                "Product Status" => $item["status"] === 100 ? "InStock" : "OutStock",
+                "Product Status" => $item["status"] === 1 ? "InStock" : "OutStock",
                 "Product Include VAT" => !!$item["include_VAT"] ?? null,
                 "Product End Date" => $item["end_date"] ?? null,
             ];

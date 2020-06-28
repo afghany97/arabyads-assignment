@@ -6,31 +6,27 @@ class ProductsFilters extends FiltersService
 {
     protected $filters = [
         "statusCode",
-        "currency",
+        "currency"
+    ];
+
+    protected $forcedFilters = [
         "balanceMin",
-        "balanceMax",
+        "balanceMax"
     ];
 
     public function statusCode(string $statusCode)
     {
-        foreach ($this->collection as $key => $value) {
-            if (strtolower($this->collection[$key]["Product Status"]) != $statusCode) {
-                unset($this->collection[$key]);
-            }
-        }
+        $this->appendCondition('strtolower($this->collection[$key]["Product Status"]) != $request->statusCode');
     }
 
     public function currency(string $currency)
     {
-        foreach ($this->collection as $key => $value) {
-            if ($this->collection[$key]["Product Currency"] != $currency) {
-                unset($this->collection[$key]);
-            }
-        }
+        $this->appendCondition('$this->collection[$key]["Product Currency"] != $request->currency');
     }
 
     public function balanceMin($price)
     {
+
         foreach ($this->collection as $key => $value) {
             if ($this->collection[$key]["Product Current Price"] < $price) {
                 unset($this->collection[$key]);
@@ -40,6 +36,7 @@ class ProductsFilters extends FiltersService
 
     public function balanceMax($price)
     {
+
         foreach ($this->collection as $key => $value) {
             if ($this->collection[$key]["Product Current Price"] > $price) {
                 unset($this->collection[$key]);
